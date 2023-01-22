@@ -14,35 +14,42 @@ namespace Stocking.Domain.AggregatesModel
     public class Article : IAggregateRoot // utiliser pour l'implementation de IarticleRepository
     {
         // Propriétés
-        public int Reference { get; set; }
-        public string Name { get; set; }
-        public Price Price { get; private set; }
-        public int Quantity { get; set; }
-        public decimal TVA { get; private set; }
-
+        public Guid Id { get; private set; }
+        public string Reference { get; private set; }
+        public string Name { get; private set; }
+        public int Quantity { get; private set; }
+        public decimal TVA { get
+            {
+                if (Type == Category.Alimentaire && IsTakeAway == true)
+                    return 5.5M;
+                else
+                    return 20M;
+            } private set { }
+        }
+        public decimal HT { get; private set; }
+        public Category Type { get; private set; }
+        public bool IsTakeAway { get; private set; }
+        public decimal TTC
+        {
+            get
+            {
+                return HT + (HT * (TVA / 100));
+            }
+            private set { }
+        }
         // Constructeur
-        public Article(int reference, string name, decimal priceHT, int quantity, decimal vateRate)
+        public Article(string reference, string name, int quantity)
         {
             Reference = reference;
             Name = name;
-            Price = new Price(priceHT, vateRate);
             Quantity = quantity;
         }
-
+        
         // Méthodes
     }
-    public class Price
-    {
-        public decimal HT { get; private set; }
-        public decimal TTC { get; private set; }
-        public decimal VAT { get; private set; }
-
-        public Price(decimal ht, decimal vat)
-        {
-            HT = ht;
-            VAT = vat;
-            TTC = ht * (1 + vat);
-        }
+    public enum Category{
+       Alimentaire,
+       NonAlimentaire
     }
     /*
     public class VATRate

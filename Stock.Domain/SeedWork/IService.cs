@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stocking.Domain.SeedWork
 {
-    public interface IRepository<T> where T : IAggregateRoot
+    public interface IService<T> where T : IAggregateRoot
     {
         Task<Article> AddAsync(T entity);
 

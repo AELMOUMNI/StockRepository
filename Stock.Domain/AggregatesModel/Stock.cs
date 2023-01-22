@@ -1,4 +1,5 @@
 ﻿
+using Stocking.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace Stocking.Domain.AggregatesModel
 {
-    public class Stock
+    public class Stock : IAggregateRoot
     {
         /*Cette classe contient une propriété pour stocker une liste d'articles. Il y a un constructeur pour initialiser cette propriété lors de la création d'un objet Stock. 
          * Il y a également des méthodes pour ajouter et supprimer des articles de la liste, ainsi que pour récupérer le nombre total d'articles dans le stock et la valeur 
          * totale du stock. Cette classe pourrait être étendue pour ajouter des fonctionnalités supplémentaires, comme la recherche d'articles par nom ou référence, 
          * ou la mise à jour de la quantité d'un article spécifique.*/
         // Propriété
+        public Guid Id { get; set; }
         public List<Article> Articles { get; set; }
 
         // Constructeur
@@ -40,7 +42,7 @@ namespace Stocking.Domain.AggregatesModel
 
         public decimal GetTotalValue()
         {
-            return Articles.Sum(a => a.Price.HT * a.Quantity);
+            return Articles.Sum(a => a.HT * a.Quantity);
         }
     }
 }
