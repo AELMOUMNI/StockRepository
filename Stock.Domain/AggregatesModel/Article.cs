@@ -43,6 +43,7 @@ namespace Stocking.Domain.AggregatesModel
             Reference = reference;
             Name = name;
             Quantity = quantity;
+            //HT = ht;
         }
         
         // Méthodes

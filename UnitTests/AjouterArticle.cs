@@ -27,6 +27,7 @@ namespace UnitTests
             Assert.Equal(_testReference, firstItem.Reference);
             Assert.Equal(_testName, firstItem.Name);
             Assert.Equal(_testQuantity, firstItem.Quantity);
+            //Assert.Equal(_testHT, firstItem.HT);
 
         }
     }

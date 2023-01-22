@@ -23,12 +23,12 @@ namespace Stocking.Infrastruture
 
         }
         public StockContext(DbContextOptions<StockContext> options) : base(options) { }
-        /**
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
                 @"Server=DESKTOP-O23UQ4T;Database=StockAPI;Integrated Security=true;Trusted_Connection=True;TrustServerCertificate=True");
-        }*/
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<ValidationResult>();
